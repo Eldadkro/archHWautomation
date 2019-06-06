@@ -1,42 +1,30 @@
 
 
-class Directblock:
-    index = 0
-    offset = 0
+class block:
 
-    def __init__(self,index,offset):
-        self.index = index
-        self.offset = offset
-
-    def binarySplit(self, number):
-        s = str(bin(number))
-        s = s[2:]
-        if(self.index != 0):
-            index = s[len(s)-self.offset-self.index:len(s)-self.offset]
-        else:
-            index = ""
-        return [s[:len(s)-self.offset - self.index],index,s[len(s)-self.offset:len(s)]]
+    def __init__(self,*args):
+        self.splits = []
+        for val in args:
+            self.splits.append(val)
+        self.splits.reverse()
 
 
     def hexSplit(self,number):
-        number = int(number)
-        offset = hex(number % 2**self.offset)
-        number = number//2**self.offset
-        index = "" if self.index == 0 else hex(number%2**self.index)
-        number = (number)//2**self.index
-        return [hex(number)[2:],index[2:],offset[2:]]
+        results = []
+        for split in self.splits:
+            results.insert(0,hex(number % 2**split)[2:]) 
+            number = number//2**split
+        results.insert(0,hex(number)[2:])
+        return results
 
-    def printAll(self,numbers):
+    def printAll(self,*numbers):
         for number in numbers:
             result = self.hexSplit(number)
-            result.append((number//2**self.offset)%2**self.index)
             result.append(number)
             print(str(result))
 
 
-
-
 if __name__ == "__main__":
-    blocks = Directblock(8,7)
-    blocks.printAll([1573,61440,57845,30000,49920,24976,61534])
+    blocks = block(8//2,6)
+    blocks.printAll(66000,66900,327600,132656,196500,198145,26296,327605,263746,239223)
 
