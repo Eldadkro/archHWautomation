@@ -25,6 +25,8 @@ class block:
 
 
 if __name__ == "__main__":
+    blocks = block(8,7)
+    blocks.printAll(1573,61440,57845,30000,49920,24976,61534)
     blocks = block(8//2,6)
     blocks.printAll(66000,66900,327600,132656,196500,198145,26296,327605,263746,239223)
 
