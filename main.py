@@ -1,5 +1,3 @@
-
-
 class block:
 
     def __init__(self,*args):
@@ -17,16 +15,29 @@ class block:
         results.insert(0,hex(number)[2:])
         return results
 
-    def printAll(self,*numbers):
+
+    def binSplit(self,number):
+        results = []
+        for split in self.splits:
+            results.insert(0,bin(number % 2**split)[2:]) 
+            number = number//2**split
+        results.insert(0,bin(number)[2:])
+        return results
+    
+    def printAllHex(self,*numbers):
         for number in numbers:
             result = self.hexSplit(number)
             result.append(number)
             print(str(result))
 
+    def printAllBin(self,*numbers):
+            for number in numbers:
+                result = self.binSplit(number)
+                result.append((number))
+                print(str(result))
+
 
 if __name__ == "__main__":
-    blocks = block(8,7)
-    blocks.printAll(1573,61440,57845,30000,49920,24976,61534)
-    blocks = block(8//2,6)
-    blocks.printAll(66000,66900,327600,132656,196500,198145,26296,327605,263746,239223)
+    blocks = block(10,6)
+    blocks.printAllHex(66000,66900,327600,132656,196500,198145,26296,327605,263746,239223)
 
