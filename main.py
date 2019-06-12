@@ -15,7 +15,7 @@ class block:
             results.insert(0,hex(number % 2**split)[2:]) 
             number = number//2**split
         results.insert(0,hex(number)[2:])
-        results.append(hex(block_num)[2:])
+        results.append(block_num)
         return results
 
 
