@@ -10,7 +10,7 @@ class block:
 
     def hexSplit(self,number):
         results = []
-        block_num = number % 2**(self.splits[0] +self.splits[1])
+        block_num = number // 2**(self.splits[-0])
         for split in self.splits:
             results.insert(0,hex(number % 2**split)[2:]) 
             number = number//2**split
@@ -51,5 +51,9 @@ def levels(number):
 if __name__ == "__main__":
     blocks = block(8,7)
     blocks.printAllHex(1573,61440,57845,30000,49920,24976,61534)
+    print("")
+    blocks = block(8,6)
+    blocks.printAllHex(66000,66900,327600,132656,196500,198145,262596,327605,263746,329223)
+
     
 
