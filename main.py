@@ -1,3 +1,4 @@
+from math import log
 class block:
 
     def __init__(self,*args):
@@ -9,10 +10,12 @@ class block:
 
     def hexSplit(self,number):
         results = []
+        block_num = number % 2**(self.splits[0] +self.splits[1])
         for split in self.splits:
             results.insert(0,hex(number % 2**split)[2:]) 
             number = number//2**split
         results.insert(0,hex(number)[2:])
+        results.append(hex(block_num)[2:])
         return results
 
 
@@ -36,8 +39,17 @@ class block:
                 result.append((number))
                 print(str(result))
 
+def indexOfNWay(size,way):
+    return log(size/(64*way),2)
+
+l = [block(23,7,6),block(24,6,6),block(21,9,6),block(19,11,6)]
+
+def levels(number):
+    for level in l:
+        print(level.hexSplit(number))
 
 if __name__ == "__main__":
-    blocks = block(10,6)
-    blocks.printAllHex(66000,66900,327600,132656,196500,198145,26296,327605,263746,239223)
+    blocks = block(8,7)
+    blocks.printAllHex(1573,61440,57845,30000,49920,24976,61534)
+    
 
